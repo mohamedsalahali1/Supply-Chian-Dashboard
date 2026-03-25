@@ -1,90 +1,75 @@
-SAMSUNG
-Supply Chain Analytics Dashboard
-─────────────────────────────
-Project Documentation & Insights Report
-Power BI  •  DAX  •  Data Modeling
+📄 README.md
+# 📊 Supply Chain Analytics Dashboard
 
-📌 Overview
+---
 
-This project is an end-to-end Supply Chain Analytics Dashboard built using Power BI. It analyzes key business operations including Sales, Inventory, Production, Procurement, and Shipment to provide actionable insights and support data-driven decision-making.
+## 📌 Overview
+This project presents an end-to-end Supply Chain Analytics Dashboard built using Power BI.  
+It provides a comprehensive analysis of business operations across Sales, Inventory, Production, Procurement, and Shipment.
 
-🎯 Objectives
+The goal is to transform raw data into actionable insights that support data-driven decision-making and improve overall operational efficiency.
 
-•	Monitor overall business performance
-•	Identify inefficiencies in supply chain operations
-•	Optimize inventory and procurement decisions
-•	Improve delivery performance
-•	Analyze sales and profitability
+---
 
+## 🎯 Objectives
+- Monitor overall business performance
+- Identify inefficiencies across supply chain operations
+- Optimize inventory and procurement decisions
+- Improve delivery performance
+- Analyze sales and profitability
 
+---
 
+## 📊 Dataset Description
 
+The dataset follows a **Star Schema** design:
 
-📊 Dataset
+### 🔹 Dimension Tables
+- dim_customer → customer details (location, segment, size)
+- dim_product → product information (category, cost, price)
+- dim_date → time-based analysis (year, month, day)
+- dim_supplier → supplier performance and quality
+- dim_facility → production facilities
 
-The dataset follows a star schema and includes:
+### 🔸 Fact Tables
+- fact_sales → revenue, profit, discounts
+- fact_inventory → stock levels, safety stock, reorder point
+- fact_production → production output, defects
+- fact_shipment → delivery performance, shipping cost
+- procurement → supplier orders, cost, lead time
 
-Dimension Tables
-•	dim_customer
-•	dim_product
-•	dim_date
-•	dim_supplier
-•	dim_facility
+---
 
-Fact Tables
-•	fact_sales
-•	fact_inventory
-•	fact_production
-•	fact_shipment
-•	procurement
+## 🔗 Data Model
+- Star Schema structure  
+- One-to-Many relationships  
+- Central fact tables connected to dimensions  
 
+---
 
+## 🛠 Tools Used
+- Power BI  
+- DAX (Data Analysis Expressions)  
+- Data Modeling  
+- Data Cleaning  
 
+---
 
+## 🧠 Key DAX Measures
 
-
-
-
-
-
-
-
-
-
-🔗 Data Model
-
-•	Star Schema design
-•	One-to-Many relationships
-•	Fact tables connected to dimension tables
-
- 
-
-🛠 Tools Used
-
-📊 Power BI
-Dashboard & Visualization	🧠 DAX
-Measures & Calculations
-🔗 Data Modeling
-Star Schema	🧹 Data Cleaning
-Transformation & Prep
-
-🧠 Key DAX Measures
-
-
-Production Efficiency
+### Production Efficiency
+```DAX
 Production Efficiency =
 DIVIDE(
     [Total Units Produced] - [Defective units],
     [Total Units Produced]
 )
-
 Stock Coverage Days
 Stock Coverage Days =
 DIVIDE(
     SUM(fact_inventory[stock_level]),
     SUM(fact_sales[quantity_sold])
 ) * 30
-
 Stock Status
 Stock Status =
 SWITCH(
@@ -93,179 +78,108 @@ SWITCH(
     [Current Stock Level] < [Safety Stock], "Low",
     "Good"
 )
-
-
 📊 Dashboard Pages
+🟦 Executive Dashboard
+KPIs:
+Total Revenue → $176.95M
+Total Profit → $48.56M
+Profit Margin → 27.44%
+Total Orders → 8,499
+Cash Cycle Days → 25.72
+Perfect Order Rate → 75.29%
+Key Insights:
+Samsung Vietnam & Samsung India have the best lead time (9 days)
+Amazon is the top revenue contributor (~37M)
+Profit contribution is consistent across major customers
+USA has the highest shipping cost
+Purpose:
 
+Provides a high-level overview of overall business performance and supports strategic decision-making.
 
-📊 1. Executive Overview
+🏭 Supplier & Procurement
+KPIs:
+Total Procurement Cost → 78M
+Avg Lead Time → 11.53 days
+Supplier Quality → 94%
+Order Fulfillment → 94%
+Key Insights:
+Procurement cost peaks in October and December (seasonality effect)
+Smartphones category drives the highest revenue and profit
+Suppliers with lower lead time significantly improve operational efficiency
+Purpose:
 
-💰 Total Revenue
-176.95M	📈 Total Profit
-48.56M
-📉 Profit Margin
-27.44%	🛒 Total Orders
-8,499
-⏱ Cash Cycle Days
-25.72	✅ Perfect Order Rate
-75.29%
-💸 Cost Ratio %
-72.56%	
+Evaluate supplier performance and optimize procurement strategy.
 
-💡 Key Insights
-•	Samsung Vietnam & India have the best lead time (9 days)
-•	Amazon.com is the top revenue contributor (~$37M)
-•	USA has the highest shipping cost and delivery volume
-•	All top platforms maintain a consistent ~$10M profit
+🏗 Production Analysis
+KPIs:
+Total Units Produced → 4M units
+Defective Units → 24K
+Defect Rate → 0.63%
+Production Efficiency → 99.37%
+Daily Production → 5.24K units
+Key Insights:
+Production peaked in October (411K) and December (398K)
+Highest growth observed in October (+167% MoM)
+Galaxy S24 Ultra & Watch6 Classic are top-performing products
+Overall production quality is very high (low defect rate)
+Purpose:
 
-🎯 Purpose: Provides a high-level overview of overall business performance across all supply chain functions.
+Monitor production efficiency, output trends, and product quality.
 
- 
+📦 Inventory Analysis
+KPIs:
+Inventory Value → 108.77M
+Stock Coverage → 25.63 days
+Inventory Accuracy → 86.9%
+Inventory Turnover → High
+Stock Status → Good
+Key Insights:
+Strong inventory turnover indicates high product movement
+Current stock levels are sufficient to support sales demand
+Inventory is well-balanced with minimal overstock risk
+Purpose:
 
-🏭 2. Supplier & Procurement
+Manage stock levels efficiently and ensure availability without excess inventory.
 
-💵 Procurement Cost
-78.13M	📦 Total Order Qty
-129K
-💲 AVG Unit Cost
-645.77	⏳ AVG Lead Time
-11.53 days
-⭐ Avg Supplier Quality
-96.63%	🔄 Reorder Frequency
-2,200
-🏢 Number of Suppliers
-7	
+🚚 Shipment Analysis
+KPIs:
+Total Shipments
+On-Time Delivery %
+Shipping Cost
+Key Insights:
+Shipping cost is highest in USA region
+Delivery performance varies across carriers
+Some shipments experience delays due to operational inefficiencies
+Purpose:
 
-💡 Key Insights
-•	October and December show peak procurement cost — seasonal demand spike
-•	Smartphones category drives the highest revenue and profit
-•	Galaxy S24 Ultra has the highest order quantity (16,990 units)
-•	Procurement cost MoM peaked at 168.47% in October
+Improve logistics efficiency and optimize delivery performance.
 
-🎯 Purpose: Evaluate supplier performance, procurement efficiency, and seasonal cost patterns.
+💰 Sales Analysis
+KPIs:
+Total Revenue
+Total Profit
+Profit Margin
+AOV (Average Order Value)
+Key Insights:
+Smartphones generate the highest revenue and profit
+Discounts impact profitability across some products
+Revenue growth varies across customers and time periods
+Purpose:
 
- 
+Analyze customer behavior, sales performance, and profitability.
 
-🏗 3. Production Analysis
-
-🏭 Total Units Produced
-4M	⚠️ Defective Units
-24K
-📉 Avg Defect Rate
-0.63%	⚙️ Production Efficiency
-99.37%
-📅 Production per Day
-5.24K	
-
-💡 Key Insights
-•	Exceptionally high production efficiency at 99.37%
-•	Peak production in October (411K) and December (398K)
-•	Defect rate stays consistently low (0.59%–0.66% range)
-•	Smartphones and tablets lead in quantity produced
-
-🎯 Purpose: Monitor production performance, quality control, and output trends over time.
-
-[ 📸 Production Overview — Dashboard Screenshot ]
-← ضع صورة الصفحة هنا →
-
-📦 4. Inventory Analysis
-
-🔄 Inventory Turnover
-924.99K	📅 Stock Coverage
-25.63 days
-💰 Inventory Value
-108.77M	🎯 Inventory Accuracy
-86.90%
-✅ Stock Status
-Good	
-
-💡 Key Insights
-•	Overall stock status is 'Good' — no critical shortages
-•	Galaxy S24 leads in both inventory value and current stock level
-•	Galaxy S24 Ultra shows heavy overstock vs other products
-•	Current stock levels are consistently above reorder points
-
-🎯 Purpose: Manage stock levels, detect overstock/understock situations, and optimize inventory health.
-
-[ 📸 Inventory Overview — Dashboard Screenshot ]
-← ضع صورة الصفحة هنا →
-
-🚚 5. Shipment Analysis
-
-📦 Total Shipments
-7,500	✅ Delivered Shipments
-5,647
-🚛 In Transit
-1,140	⚠️ Delayed Shipments
-573
-⏱ On-Time Delivery %
-89.85%	💸 Total Shipping Cost
-19.42M
-📊 Total Qty Shipped
-3M	
-
-💡 Key Insights
-•	On-time delivery rate is 89.85% — room for improvement
-•	Carrier capacity is the leading delay reason
-•	Amazon.com Inc. has the most delayed shipments (37)
-•	Shipping costs peaked in December at 2.07M
-•	In-transit shipments grew steadily through the year (82→116)
-
-🎯 Purpose: Analyze logistics performance, identify delay causes, and optimize carrier selection.
-
-[ 📸 Shipment Overview — Dashboard Screenshot ]
-← ضع صورة الصفحة هنا →
-
-💰 6. Sales Analysis
-
-💰 Total Revenue
-176.95M	📈 Total Profit
-48.56M
-📉 Profit Margin %
-27.44%	🛒 Total Orders
-8,499
-💳 AVG Order Value
-20.82K	✅ Perfect Order Rate
-75.29%
-💸 Cost Ratio %
-72.56%	
-
-💡 Key Insights
-•	Amazon.com leads revenue at $36.75M (27.43% margin)
-•	All top 5 platforms maintain ~27% profit margin
-•	Galaxy S24 Ultra is the highest profit product (~$10M)
-•	Sales peak in October–December (seasonal uplift)
-•	Amazon and Samsung Direct Show YoY revenue growth (1.09x, 1.03x)
-
-🎯 Purpose: Analyze sales performance, customer behavior, product profitability, and revenue trends.
-
-[ 📸 Sales Overview — Dashboard Screenshot ]
-← ضع صورة الصفحة هنا →
-
-🔍 Key Insights
-
-•	Seasonal peaks in procurement and production occur in October and December
-•	Samsung Vietnam & India are top-performing suppliers with the shortest lead time (9 days)
-•	Production efficiency is outstanding at 99.37% with minimal defect rate
-•	Overall inventory health is Good with no critical stock shortages
-•	On-time delivery is strong at 89.85% but carrier capacity causes most delays
-•	Smartphones consistently generate the highest revenue and profit across all dimensions
-
+🔍 Key Insights Summary
+Strong seasonal patterns in procurement and production (October & December)
+High-performing suppliers improve operational speed
+Inventory turnover reflects strong demand
+Shipping cost optimization is required
+Discounts impact overall profitability
 💡 Recommendations
-
-•	Prioritize Samsung Vietnam & India for procurement to reduce lead times
-•	Investigate and address carrier capacity constraints to improve delivery rates
-•	Prepare inventory buffer stock ahead of October–December seasonal spikes
-•	Optimize shipping cost management — December peaks suggest need for carrier renegotiation
-•	Continue leveraging Smartphone category strength while expanding Wearables segment
-
+Focus on suppliers with lower lead time
+Optimize shipping strategies to reduce costs
+Prepare for seasonal demand spikes
+Improve inventory planning and monitoring
+Optimize pricing and discount strategies
 📌 Conclusion
 
-This dashboard demonstrates how data analytics can transform raw supply chain data into actionable insights, enabling better decision-making across sales, operations, logistics, and procurement. The integrated Power BI model provides stakeholders with real-time visibility into KPIs, trends, and inefficiencies — driving continuous improvement across the entire Samsung supply chain.
-
-🔗 Project Files
-
-•	Power BI File (.pbix)
-•	Dataset (Fact & Dimension Tables)
-•	Dashboard Screenshots
-•	This Documentation
+This dashboard demonstrates how data analytics can transform complex supply chain data into meaningful insights, enabling businesses to monitor performance, identify issues, and make informed decisions.
